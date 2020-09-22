@@ -47,11 +47,22 @@
 			\item[1.] Abra o \textbf{projeto2CodigoLivro} e teste o seu funcionamento. Responda:
 			
 			\begin{enumerate}
-				\item[1.1.] Qual algoritmo é usado no código? Em qual modo?
+				\item[1.1.] Qual algoritmo é usado no código? Em qual modo?\\
+				Resposta: O algoritmo usado é o \textit{AES} no modo \textit{CBC}.
 				
-				\item[1.2.] Explique o que faz o método \textit{generateKey} da classe \link{https://docs.oracle.com/javase/7/docs/api/javax/crypto/KeyGenerator.html.KeyGenerator}
+				\item[1.2.] Explique o que faz o método \textit{generateKey} da classe \link{https://docs.oracle.com/javase/7/docs/api/javax/crypto/KeyGenerator.html.KeyGenerator}\\
+				Resposta: Gera uma chave simétrica, podendo a chave ser gerada independente de um algoritmo ou de maneira específica de um algoritmo.
 				
-				\item[1.3.] Explique como são usados os métodos \textit{init}, \textit{update} e \textit{doFinal} para cifrar e para decifrar os dados nesse código. Leia a documentação e entenda bem o funcionamento desses métodos.
+				\item[1.3.] Explique como são usados os métodos \textit{init}, \textit{update} e \textit{doFinal} para cifrar e para decifrar os dados nesse código. Leia a documentação e entenda bem o funcionamento desses métodos.\\
+				Resposta:\\
+				\begin{itemize}
+					\item \textbf{\textit{init}:} Inicializa a cifra com uma chave e um conjunto de parâmetros de algoritmo, podendo ser inicializada para uma das quatro seguintes operações: criptografia, decodificação, embalagem da chave ou desembrulhamento da chave, dependendo do valor do parâmetro \textit{opmode}.\\
+					No exemplo, a cifra foi inicializada usando \textbf{DECRYPT\_MODE} (decifrar), com uma chave gerada previamente e um IV aleatório. 
+					
+					\item \textbf{\textit{update}:} Usado para continuar uma operação de criptografia ou decriptação de múltiplas partes (dependendo de como a cifra foi inicializada), processando outra parte de dados. Retorna o número de \textit{bytes} armazenados na saída.
+					
+					\item \textbf{\textit{doFinal}:} Finaliza a operação de criptografia ou decriptografia de múltiplas partes,  dependendo de como a cifra foi inicializada. Os dados de entrada que podem ter sido armazenados em \textit{buffer} durante uma operação de atualização anterior são processados. Ao terminar, este método reinicia a cifra para o estado em que se encontrava inicialmente através de uma chamada para o init. Ou seja, o objeto é reinicializado e está disponível para criptografar ou decodificar (dependendo do modo de operação que foi especificado na chamada ao \textit{init}) mais dados.
+				\end{itemize}
 			\end{enumerate}
 			
 			\item[2.] Crie um programa que permite ao usuário entrar com uma string pelo teclado, o programa cifra a string e mostra a string cifrada na tela. O código deve ``sortear'' uma boa chave e IV. Use o modo CTR (counter) do algoritmo AES para cifrar. Use o projeto3Aes para auxiliar.
