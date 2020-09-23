@@ -19,8 +19,8 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 
-public class ThirdQuestion {
-	private static final ThirdQuestion obj = new ThirdQuestion();
+public class SecondQuestion {
+	private static final SecondQuestion obj = new SecondQuestion();
 	private Key key;
 	private Cipher cipher;
 	private IvParameterSpec iv;
