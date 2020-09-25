@@ -13,6 +13,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.print.DocFlavor.INPUT_STREAM;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
@@ -48,9 +49,8 @@ public class ThirdQuestion {
 	}
 
 	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
 		try {
-			Scanner input = new Scanner(System.in);
-
 			System.out.println("Digite a chave: ");
 			String keyUser = input.nextLine();
 
@@ -67,6 +67,8 @@ public class ThirdQuestion {
 		} catch (Exception e) {
 			System.err.println("Algo de errado não está certo!" + e.getMessage());
 			e.printStackTrace();
+		} finally {
+			input.close();
 		}
 	}
 
