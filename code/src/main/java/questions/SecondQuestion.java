@@ -32,12 +32,11 @@ public class SecondQuestion {
 			String encrypt = encrypt(message);
 			System.out.printf("%nA mensagem cifrado é: %s%n", encrypt);
 			
-			System.out.printf("%nDecifrando mensagem... Mensagem decifrada: %s", decrypt(encrypt));
+			System.out.printf("%nDecifrando mensagem... Mensagem decifrada: %s%n%n", decrypt(encrypt));
 		} catch (Exception e) {
-			System.err.printf("%nUm erro ocorreu durante a execução: %s%n", e.getMessage());
+			System.err.printf("%nUm erro ocorreu durante a execução: %s\n", e.getMessage());
 			e.printStackTrace();
 		}
-
 	}
 
 	private void init() throws NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
@@ -65,8 +64,6 @@ public class SecondQuestion {
 	private String decrypt(String message) throws InvalidKeyException, InvalidAlgorithmParameterException,
 			NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException, IllegalBlockSizeException,
 			BadPaddingException, DecoderException {
-		init();
-
 		cipher.init(Cipher.DECRYPT_MODE, key, iv);
 		return new String(cipher.doFinal(Hex.decodeHex(message)));
 	}
