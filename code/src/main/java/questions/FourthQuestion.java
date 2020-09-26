@@ -1,4 +1,4 @@
-package trabalho2;
+package questions;
 
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
@@ -30,22 +30,19 @@ public class FourthQuestion {
 		return new String(Hex.encode(messageDigest.digest(message.getBytes())));
 	}
 
-	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
+	public void main(Scanner input) {
 		try {
 			System.out.println("Digite a frase:");
 			String message = input.nextLine();
 			
+			System.out.println("O hash é = " + calcHash(message));
+			
 			System.out.println("Digite a chave:");
 			String key = input.nextLine();
 
-			String hash = obj.calcMAC(message, key);
-
-			System.out.println("O hash é = " + hash);
+			System.out.println("O MAC é = " + obj.calcMAC(message, key));
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			input.close();
 		}
 	}
 }

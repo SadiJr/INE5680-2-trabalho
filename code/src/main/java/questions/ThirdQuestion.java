@@ -1,4 +1,4 @@
-package trabalho2;
+package questions;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -13,7 +13,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import javax.print.DocFlavor.INPUT_STREAM;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
@@ -48,28 +47,62 @@ public class ThirdQuestion {
 		return new String(cipher.doFinal(Hex.decodeHex(message.toCharArray())));
 	}
 
-	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
+	public void main(Scanner input) {
 		try {
-			System.out.println("Digite a chave: ");
-			String keyUser = input.nextLine();
+			boolean inLoop = true;
 
-			System.out.println("Digite o IV:");
-			String ivUser = input.nextLine();
+			while (inLoop) {
+				System.out.println("Digite:\n1 - Decifrar CBC\n2 - Decifrar CTR\n0 - Voltar para a tela anterior.");
+				
+				int userInput = InputUtils.verifyUserInput(input.nextLine());
 
-			System.out.println("Digite o texto cifrado");
-			String message = input.nextLine();
-
-//			String plainText = obj.aesCBCDecrypt(keyUser, ivUser, message);
-
-			String plainText = obj.aesCTRDecrypt(keyUser, ivUser, message);
-			System.out.println("Texto decifrado = " + plainText);
+				boolean cbc = false;
+				
+				switch (userInput) {
+				case 0:
+					inLoop = false;
+					continue;
+				
+				case 1:
+					cbc = true;
+					break;
+				
+				case 2:
+					break;
+				
+				default:
+					System.out.println("Opção inválida!");
+					break;
+				}
+				
+				String[] parameters = readParameters(input);
+				
+				String plainText;
+				if(cbc)
+					plainText = obj.aesCBCDecrypt(parameters[0], parameters[1], parameters[2]);
+				else 
+					plainText = obj.aesCTRDecrypt(parameters[0], parameters[1], parameters[2]);
+				
+				System.out.println("Texto decifrado = " + plainText);
+			}
 		} catch (Exception e) {
 			System.err.println("Algo de errado não está certo!" + e.getMessage());
 			e.printStackTrace();
-		} finally {
-			input.close();
 		}
+
+	}
+
+	private String[] readParameters(Scanner input) {
+		System.out.println("Digite a chave: ");
+		String keyUser = input.nextLine();
+
+		System.out.println("Digite o IV:");
+		String ivUser = input.nextLine();
+
+		System.out.println("Digite o texto cifrado");
+		String message = input.nextLine();
+
+		return new String[] { keyUser, ivUser, message };
 	}
 
 }

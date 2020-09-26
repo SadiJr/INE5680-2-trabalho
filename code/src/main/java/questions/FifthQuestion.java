@@ -1,6 +1,5 @@
-package trabalho2;
+package questions;
 
-import java.nio.ByteBuffer;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -53,9 +52,7 @@ public class FifthQuestion {
 		return Hex.encodeHexString(salt);
 	}
 
-	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
-
+	public void main(Scanner input) {
 		try {
 			System.out.println("Digite algo:");
 			String message = input.nextLine();
@@ -70,8 +67,6 @@ public class FifthQuestion {
 			System.out.println("Mensagem decriptografada: " + decrypt);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			// TODO: handle finally clause
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package trabalho2;
+package questions;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -20,22 +20,22 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 
 public class SecondQuestion {
-	private static final SecondQuestion obj = new SecondQuestion();
 	private Key key;
 	private Cipher cipher;
 	private IvParameterSpec iv;
 
-	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
+	public void main(Scanner input) {
 		try {
 			System.out.println("Digite uma frase qualquer: ");
 			String message = input.nextLine();
 
-			System.out.printf("%nA mensagem cifrado é: %s%n", obj.encrypt(message));
+			String encrypt = encrypt(message);
+			System.out.printf("%nA mensagem cifrado é: %s%n", encrypt);
+			
+			System.out.printf("%nDecifrando mensagem... Mensagem decifrada: %s", decrypt(encrypt));
 		} catch (Exception e) {
-			System.err.printf("%nUm erro ocorreu durante a execução: %s", e.getMessage());
-		} finally {
-			input.close();
+			System.err.printf("%nUm erro ocorreu durante a execução: %s%n", e.getMessage());
+			e.printStackTrace();
 		}
 
 	}
@@ -68,6 +68,6 @@ public class SecondQuestion {
 		init();
 
 		cipher.init(Cipher.DECRYPT_MODE, key, iv);
-		return new String(cipher.doFinal(Hex.decodeHex(message.toCharArray())));
+		return new String(cipher.doFinal(Hex.decodeHex(message)));
 	}
 }
