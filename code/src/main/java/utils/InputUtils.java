@@ -1,4 +1,4 @@
-package questions;
+package utils;
 
 public class InputUtils {
 	public static int verifyUserInput(String question) {
