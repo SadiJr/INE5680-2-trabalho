@@ -1,7 +1,5 @@
 package questions;
 
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -17,15 +15,20 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Hex;
 
 public class FifthQuestion {
-	private static final FifthQuestion obj = new FifthQuestion();
+	private Key key;
+	private GCMParameterSpec gcm;
+	private Cipher c;
 
 	private String encrypt(String password, String message) throws Exception {
 		String salt = generateSalt();
 
-		Cipher c = Cipher.getInstance("AES/GCM/NoPadding");
-		c.init(Cipher.ENCRYPT_MODE, generateKey(password, salt), new GCMParameterSpec(128, salt.getBytes()));
+		c = Cipher.getInstance("AES/GCM/NoPadding");
 
-		return new String(Hex.encodeHex(c.doFinal(message.getBytes())));
+		key = generateKey(password, salt);
+		gcm = new GCMParameterSpec(128, salt.getBytes());
+
+		c.init(Cipher.ENCRYPT_MODE, key, gcm);
+		return Hex.encodeHexString(c.doFinal(message.getBytes()));
 	}
 
 	private Key generateKey(String password, String salt) throws Exception {
@@ -35,14 +38,10 @@ public class FifthQuestion {
 		return new SecretKeySpec(derivedKey.getEncoded(), "AES");
 	}
 
-	private String decrypt(String password, String message)
-			throws InvalidKeyException, InvalidAlgorithmParameterException, Exception {
-		String salt = generateSalt();
-
-		Cipher c = Cipher.getInstance("AES/GCM/NoPadding");
-		c.init(Cipher.DECRYPT_MODE, generateKey(password, salt), new GCMParameterSpec(128, salt.getBytes()));
-		c.update(Hex.decodeHex(message));
-		return new String(Hex.encodeHex(c.doFinal(Hex.decodeHex(message))));
+	private String decrypt(String message) throws Exception {
+		c.init(Cipher.DECRYPT_MODE, key, gcm);
+		byte[] decodeHex = c.update(Hex.decodeHex(message));
+		return new String(c.doFinal(decodeHex));
 	}
 
 	private String generateSalt() throws NoSuchAlgorithmException {
@@ -60,10 +59,10 @@ public class FifthQuestion {
 			System.out.println("Digite a senha:");
 			String password = input.nextLine();
 
-			String encrypt = obj.encrypt(password, message);
+			String encrypt = encrypt(password, message);
 			System.out.println("Mensagem criptografada: " + encrypt);
 
-			String decrypt = obj.decrypt(password, encrypt);
+			String decrypt = decrypt(encrypt);
 			System.out.println("Mensagem decriptografada: " + decrypt);
 		} catch (Exception e) {
 			e.printStackTrace();
