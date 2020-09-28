@@ -202,9 +202,9 @@ public class EncryptFile {
 
 	private byte[] generateSalt() throws NoSuchAlgorithmException {
 		SecureRandom sr = SecureRandom.getInstanceStrong();
-		byte[] salt = new byte[96];
-		sr.nextBytes(salt);
-		return salt;
+		byte[] s = new byte[96];
+		sr.nextBytes(s);
+		return s;
 	}
 
 	private byte[] generateIv() throws NoSuchAlgorithmException {
