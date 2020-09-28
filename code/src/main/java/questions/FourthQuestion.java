@@ -16,11 +16,11 @@ public class FourthQuestion {
 	private static final FourthQuestion obj = new FourthQuestion();
 
 	private String calcMAC(String message, String key) throws InvalidKeyException, NoSuchAlgorithmException {
-		Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
-		SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), "HmacSHA256");
-		sha256_HMAC.init(secretKey);
+		Mac mac = Mac.getInstance("HmacSHA512");
+		SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), "HmacSHA512");
+		mac.init(secretKey);
 
-		return new String(Hex.encode(sha256_HMAC.doFinal(message.getBytes())));
+		return new String(Hex.encode(mac.doFinal(message.getBytes())));
 	}
 
 	private String calcHash(String message) throws NoSuchAlgorithmException {
@@ -32,15 +32,22 @@ public class FourthQuestion {
 
 	public void main(Scanner input) {
 		try {
-			System.out.println("Digite a frase:");
+			System.out.println("Digite a frase 1:");
 			String message = input.nextLine();
-			
-			System.out.println("O hash é = " + calcHash(message));
 			
 			System.out.println("Digite a chave:");
 			String key = input.nextLine();
 
+			System.out.println("O hash é = " + calcHash(message));
 			System.out.println("O MAC é = " + obj.calcMAC(message, key));
+			
+			System.out.println("Digite a frase 2:");
+			String message2 = input.nextLine();
+			
+			System.out.println("O hash é = " + calcHash(message2));
+			System.out.println("O MAC é = " + obj.calcMAC(message2, key));
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
