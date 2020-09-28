@@ -53,7 +53,7 @@ public class FifthQuestion {
 
 	public void main(Scanner input) {
 		try {
-			System.out.println("Digite algo:");
+			System.out.println("\n[5] Digite algo:");
 			String message = input.nextLine();
 
 			System.out.println("Digite a senha:");

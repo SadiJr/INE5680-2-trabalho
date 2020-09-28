@@ -20,8 +20,6 @@ import org.apache.commons.codec.binary.Hex;
 import utils.InputUtils;
 
 public class ThirdQuestion {
-	private static final ThirdQuestion obj = new ThirdQuestion();
-
 	private Key key;
 	private Cipher cipher;
 	private IvParameterSpec iv;
@@ -54,7 +52,7 @@ public class ThirdQuestion {
 			boolean inLoop = true;
 
 			while (inLoop) {
-				System.out.println("Digite:\n1 - Decifrar CBC\n2 - Decifrar CTR\n0 - Voltar para a tela anterior.");
+				System.out.println("\n[3] Digite:\n1 - Decifrar CBC\n2 - Decifrar CTR\n0 - Voltar para a tela anterior.");
 				
 				int userInput = InputUtils.verifyUserInput(input.nextLine());
 
@@ -81,9 +79,9 @@ public class ThirdQuestion {
 				
 				String plainText;
 				if(cbc)
-					plainText = obj.aesCBCDecrypt(parameters[0], parameters[1], parameters[2]);
+					plainText = aesCBCDecrypt(parameters[0], parameters[1], parameters[2]);
 				else 
-					plainText = obj.aesCTRDecrypt(parameters[0], parameters[1], parameters[2]);
+					plainText = aesCTRDecrypt(parameters[0], parameters[1], parameters[2]);
 				
 				System.out.println("Texto decifrado = " + plainText);
 			}

@@ -13,7 +13,6 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Hex;
 
 public class FourthQuestion {
-	private static final FourthQuestion obj = new FourthQuestion();
 
 	private String calcMAC(String message, String key) throws InvalidKeyException, NoSuchAlgorithmException {
 		Mac mac = Mac.getInstance("HmacSHA512");
@@ -32,22 +31,21 @@ public class FourthQuestion {
 
 	public void main(Scanner input) {
 		try {
-			System.out.println("Digite a frase 1:");
+			System.out.println("\n[4] Digite:");
+			System.out.println("A frase 1:");
 			String message = input.nextLine();
-			
-			System.out.println("Digite a chave:");
+
+			System.out.println("A chave:");
 			String key = input.nextLine();
 
 			System.out.println("O hash é = " + calcHash(message));
-			System.out.println("O MAC é = " + obj.calcMAC(message, key));
-			
-			System.out.println("Digite a frase 2:");
+			System.out.println("O MAC é = " + calcMAC(message, key));
+
+			System.out.println("A frase 2:");
 			String message2 = input.nextLine();
-			
+
 			System.out.println("O hash é = " + calcHash(message2));
-			System.out.println("O MAC é = " + obj.calcMAC(message2, key));
-			
-			
+			System.out.println("O MAC é = " + calcMAC(message2, key));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

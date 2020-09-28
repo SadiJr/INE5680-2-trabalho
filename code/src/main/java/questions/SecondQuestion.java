@@ -26,13 +26,13 @@ public class SecondQuestion {
 
 	public void main(Scanner input) {
 		try {
-			System.out.println("Digite uma frase qualquer: ");
+			System.out.println("\n[2] Digite uma frase qualquer: ");
 			String message = input.nextLine();
 
 			String encrypt = encrypt(message);
 			System.out.printf("%nA mensagem cifrado é: %s%n", encrypt);
 			
-			System.out.printf("%nDecifrando mensagem... Mensagem decifrada: %s%n%n", decrypt(encrypt));
+			System.out.printf("%nDecifrando mensagem... Mensagem decifrada: %s%n", decrypt(encrypt));
 		} catch (Exception e) {
 			System.err.printf("%nUm erro ocorreu durante a execução: %s\n", e.getMessage());
 			e.printStackTrace();
