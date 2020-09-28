@@ -48,13 +48,13 @@
 			
 			\begin{enumerate}
 				\item[1.1.] Qual algoritmo é usado no código? Em qual modo?\\
-				Resposta: O algoritmo usado é o \textit{AES} no modo \textit{CBC}.
+				\textbf{Resposta:} O algoritmo usado é o \textit{AES} no modo \textit{CBC}.
 				
 				\item[1.2.] Explique o que faz o método \textit{generateKey} da classe \link{https://docs.oracle.com/javase/7/docs/api/javax/crypto/KeyGenerator.html.KeyGenerator}\\
-				Resposta: Gera uma chave simétrica, podendo a chave ser gerada independente de um algoritmo ou de maneira específica de um algoritmo.
+				\textbf{Resposta:} Gera uma chave simétrica, podendo a chave ser gerada independente de um algoritmo ou de maneira específica de um algoritmo.
 				
 				\item[1.3.] Explique como são usados os métodos \textit{init}, \textit{update} e \textit{doFinal} para cifrar e para decifrar os dados nesse código. Leia a documentação e entenda bem o funcionamento desses métodos.\\
-				Resposta:\\
+				\textbf{Resposta:}\\
 				\begin{itemize}
 					\item \textbf{\textit{init}:} Inicializa a cifra com uma chave e um conjunto de parâmetros de algoritmo, podendo ser inicializada para uma das quatro seguintes operações: criptografia, decodificação, embalagem da chave ou desembrulhamento da chave, dependendo do valor do parâmetro \textit{opmode}.\\
 					No exemplo, a cifra foi inicializada usando \textbf{DECRYPT\_MODE} (decifrar), com uma chave gerada previamente e um IV aleatório. 
@@ -64,8 +64,6 @@
 					\item \textbf{\textit{doFinal}:} Finaliza a operação de criptografia ou decriptografia de múltiplas partes,  dependendo de como a cifra foi inicializada. Os dados de entrada que podem ter sido armazenados em \textit{buffer} durante uma operação de atualização anterior são processados. Ao terminar, este método reinicia a cifra para o estado em que se encontrava inicialmente através de uma chamada para o init. Ou seja, o objeto é reinicializado e está disponível para criptografar ou decodificar (dependendo do modo de operação que foi especificado na chamada ao \textit{init}) mais dados.
 				\end{itemize}
 			\end{enumerate}
-			
-			\item[2.] Crie um programa que permite ao usuário entrar com uma string pelo teclado, o programa cifra a string e mostra a string cifrada na tela. O código deve ``sortear'' uma boa chave e IV. Use o modo CTR (counter) do algoritmo AES para cifrar. Use o projeto3Aes para auxiliar.
 			
 			\item[3.] Nesse projeto você irá programar dois sistemas de decifragem, um usando o AES em \textbf{modo CBC} e outro usando o AES no \textbf{modo contador} (\textit{counter mode} -- CTR). Em ambos os casos um IV de 16 bytes é escolhido de forma aleatória. Para o modo CBC use o esquema de padding PKCS5. Para o modo CTR use NoPadding.
 			
@@ -94,8 +92,13 @@ a7c07ece1c8e10a49368b86a946c8379cd8fa01a47f1956671144b0ca18a4c812cde8f7b9}
 						\textbf{Resposta:} Modo CTR (counter) - cifra a contagem do IV e faz XOR com bloco de texto plano.
 				\end{enumerate}
 			
-			\item[4.] Crie um programa que recebe duas strings pelo teclado, calcula o hash (resumo criptográfico) e o MAC de cada uma das strings escrevendo o resultado na tela. Teste e explique o funcionamento do programa com entrada de strings iguais e depois com entrada de strings diferentes.
+			\item[4.] Crie um programa que recebe duas strings pelo teclado, calcula o hash (resumo criptográfico) e o MAC de cada uma das strings escrevendo o resultado na tela. Teste e explique o funcionamento do programa com entrada de strings iguais e depois com entrada de strings diferentes.\\
+			\textbf{Resposta:} Como é uma função de cáculo de \textit{hash}, entradas iguais sempre geram saídas iguais e entradas diferentes sempre geram saídas diferentes. Isso pode ser observado durante a execução do código de acordo com os \textit{prints}.\footnote{No cálculo do \textit{hash} e do MAC foi usado o SHA512}
 			
-			\item[5.] Crie um programa que recebe uma string pelo teclado e cifra a string usando CRIPTOGRAFIA AUTENTICADA (AES no modo GCM). O programa também deve gerar uma boa chave usando PBKDF2.
-		\end{enumerate}	
+			\includegraphics[scale=.3]{~/Pictures/01.png}
+			
+			\includegraphics[scale=.3]{~/Pictures/02.png}
+		\end{enumerate}
+		
+		\textbf{OBS:} As questões 2, 5 e 6 não se encontram neste relatório por se tratarem de questões práticas de implementação que não possuem nenhuma pergunta.
 \end{document}
