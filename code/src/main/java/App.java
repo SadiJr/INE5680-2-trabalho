@@ -1,10 +1,12 @@
 import java.util.Scanner;
 
+import implementation.EncryptFile;
 import questions.Questions;
 import utils.InputUtils;
 
 public class App {
 	private static final Questions QUESTIONS = new Questions();
+	private static final EncryptFile IMPLEMENTATION = new EncryptFile();
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
@@ -22,7 +24,7 @@ public class App {
 					keepLoop = false;
 					break;
 				case 1:
-					System.out.println("Falta fazer");
+					IMPLEMENTATION.main(input);
 					break;
 
 				case 2:
